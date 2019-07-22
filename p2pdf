@@ -1,0 +1,17 @@
+#picture turn to pdf
+
+import sys
+from reportlab.lib.pagesizes import portrait
+from reportlab.pdfgen import canvas
+from PIL import Image
+
+def imgtopdf(input_paths, outputpath):    
+    (maxw, maxh) = Image.open(input_paths).size
+    print(maxw, maxh)    
+    c = canvas.Canvas(outputpath, pagesize=portrait((maxw, maxh)))    
+
+    c.drawImage(input_paths, 0, 0, maxw, maxh)    
+    c.showPage()    
+    c.save()
+
+imgtopdf("2b.jpg", "2b.pdf")
