@@ -1,0 +1,112 @@
+#https://blog.csdn.net/u011463646/article/details/78461958
+#https://blog.csdn.net/changdejie/article/details/83089933
+
+from scipy.optimize import curve_fit
+import matplotlib.pyplot as plt
+import numpy as np
+
+#def func(x, a, b, c):
+#    return a * np.exp(-b * x) + c
+def func(x, a, k, r):
+    return a*k/r*((x/r)**(k-1))*np.exp(-(x/r)**k)
+
+#60 fag03
+xdata = np.linspace(0, 8, 9)
+ydata=np.array([2,20,23,23,22,19,19,17,20]) #60 bearing
+#ydata=np.array([10,69,56,79,68,51,45,32,27]) #60 total
+f1=plt.subplot(211)
+f1.plot(xdata,ydata,'b')
+f1.set_ylabel('return piece') 
+f1.set_xlabel('month') 
+popt, pcov = curve_fit(func, xdata, ydata)
+y2 = [func(i, popt[0],popt[1],popt[2]) for i in xdata]
+#plt.plot(xdata,y2,'r--')
+#plt.show()
+
+x3 =  np.linspace(0, 48, 49)
+y3 = [func(i, popt[0],popt[1],popt[2]) for i in x3]
+f1.plot(x3,y3,'g')
+
+total=8415
+xhour=[]
+ysum=[]
+for i in range(len(x3)):
+    xhour.append(x3[i]*30*24)
+for i in range(len(x3)):
+    y=0
+    for j in range(i):
+         y=y+y3[j]
+    ysum.append(y/total)
+f2=plt.subplot(212)
+f2.plot(xhour,ysum,'r')
+f2.set_ylabel('return rate') 
+f2.set_xlabel('hour') 
+plt.show()
+
+
+#10020 fag08
+xdata = np.linspace(0, 6, 7)
+#ydata=np.array([0,6,7,8,5,5,6]) #bearing fag
+ydata=np.array([4,30,29,21,22,22,17]) #total fag
+f1=plt.subplot(211)
+f1.plot(xdata,ydata,'b')
+f1.set_ylabel('return piece') 
+f1.set_xlabel('month') 
+popt, pcov = curve_fit(func, xdata, ydata)
+y2 = [func(i, popt[0],popt[1],popt[2]) for i in xdata]
+#plt.plot(xdata,y2,'r--')
+#plt.show()
+
+x3 =  np.linspace(0, 48, 49)
+y3 = [func(i, popt[0],popt[1],popt[2]) for i in x3]
+f1.plot(x3,y3,'g')
+
+total=2003 #fag
+xhour=[]
+ysum=[]
+for i in range(len(x3)):
+    xhour.append(x3[i]*30*24)
+for i in range(len(x3)):
+    y=0
+    for j in range(i):
+         y=y+y3[j]
+    ysum.append(y/total)
+f2=plt.subplot(212)
+f2.plot(xhour,ysum,'r')
+f2.set_ylabel('return rate') 
+f2.set_xlabel('hour') 
+plt.show()
+
+
+#10020 skf08
+xdata = np.linspace(0, 6, 7)
+#ydata=np.array([0,6,9,5,8,5,5]) #bearing skf
+ydata=np.array([2,12,7,3,3,1,1]) #total skf
+f1=plt.subplot(211)
+f1.plot(xdata,ydata,'b')
+f1.set_ylabel('return piece') 
+f1.set_xlabel('month') 
+popt, pcov = curve_fit(func, xdata, ydata)
+y2 = [func(i, popt[0],popt[1],popt[2]) for i in xdata]
+#plt.plot(xdata,y2,'r--')
+#plt.show()
+
+x3 =  np.linspace(0, 48, 49)
+y3 = [func(i, popt[0],popt[1],popt[2]) for i in x3]
+f1.plot(x3,y3,'g')
+
+total=1263 #skf
+xhour=[]
+ysum=[]
+for i in range(len(x3)):
+    xhour.append(x3[i]*30*24)
+for i in range(len(x3)):
+    y=0
+    for j in range(i):
+         y=y+y3[j]
+    ysum.append(y/total)
+f2=plt.subplot(212)
+f2.plot(xhour,ysum,'r')
+f2.set_ylabel('return rate') 
+f2.set_xlabel('hour') 
+plt.show()
