@@ -1,0 +1,13 @@
+#delete pdf
+
+import PyPDF2
+original = r'88.pdf' 
+new = r'8.pdf' 
+original_pdf = PyPDF2.PdfFileReader(original) 
+page8 = original_pdf.getPage(0) 
+
+pdfWriter = PyPDF2.PdfFileWriter() 
+pdfWriter.addPage(page8)
+
+with open(new, 'wb') as f:
+    pdfWriter.write(f)
