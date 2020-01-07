@@ -1,0 +1,12 @@
+import numpy as np
+from PIL import Image
+#把所有的图片，放到一个列表里面：
+imgs = []
+for n in range(6):
+    img=Image.open(str(n+2)+'.png')
+    img=np.asarray(img)
+    imgs.append(img)
+
+#把imgs里面的图片串联起来，导出动态图  
+import imageio
+imageio.mimsave("0.gif",imgs,fps=1)
