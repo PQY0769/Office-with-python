@@ -1,0 +1,19 @@
+#https://www.cnblogs.com/tele-share/p/10533815.html
+#遍历文件夹中文件
+#https://www.cnblogs.com/fengf233/p/10880782.html
+#删除excel中指定行和列
+
+from openpyxl import Workbook,load_workbook
+import os
+def reapxl(file):
+    for root, dirs, files in os.walk(file):
+        for f in files:
+            print(os.path.join(root, f))
+            wb = Workbook()
+            wb = load_workbook(os.path.join(root, f))
+            ws = wb.active
+            ws.delete_cols(1,1) # 从第一列开始删除1行，是真正意义的第一列
+            ws.delete_rows(1,2)
+            wb.save(os.path.join(root, f))
+            
+reap xl("C:/Users/03308/waterfall/fag03")   
